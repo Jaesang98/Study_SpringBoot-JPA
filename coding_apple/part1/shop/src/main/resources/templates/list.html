@@ -16,7 +16,28 @@
             <h4 th:text="${items.title}">바지</h4>
             <a th:href="@{'/detail/' + ${items.id}}">링크</a>
             <p th:text="${items.price}">7억</p>
+            <a th:href="@{'/edit/' + ${items.id}}">✏️s</a>
+            <span th:onclick="fetch('/item?id=[[${items.id}]]', { method : 'DELETE' } )
+                .then(r => r.text())
+                .then(()=>{
+                    location.reload();
+                })
+            ">🗑️s</span>
         </div>
     </div>
+
+    <button class="btn">버튼</button>
+
+<script>
+    document.querySelectorAll('.btn')[0].addEventListener('click', function(){
+        fetch('/test1', {
+            method : 'POST',
+            headers : { "Content-Type": "application/json" },
+            body : JSON.stringify({title : 'kim', price : 123})
+        })
+    })
+
+</script>
+
 </body>
 </html>
