@@ -10,7 +10,7 @@ import java.util.Date;
 public class BasicController {
     @GetMapping("/")
     String hello() {
-        return "index.html";
+        return "redirect:/index.html";
     }
 
     @GetMapping("/about")

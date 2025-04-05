@@ -1,6 +1,7 @@
 package com.example.shop.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -67,6 +68,12 @@ public class ItemController {
     @DeleteMapping("/delete")
     String deletePost(@RequestParam Long id) {
         itemService.deleteItem(id);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/test2")
+    String test2() {
+        new BCryptPasswordEncoder().encode("문자~~~");
         return "redirect:/list";
     }
 }
