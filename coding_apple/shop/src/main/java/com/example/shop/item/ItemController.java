@@ -1,6 +1,8 @@
 package com.example.shop.item;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,6 +76,20 @@ public class ItemController {
     @GetMapping("/test2")
     String test2() {
         new BCryptPasswordEncoder().encode("문자~~~");
+        return "redirect:/list";
+    }
+
+    @GetMapping("/list/page/{page}")
+    String getListPage(Model model, @PathVariable Integer page) {
+        Page<Item> result = itemRepository.findPageBy(PageRequest.of(page-1,5));
+        model.addAttribute("items", result);
+        return "list.html";
+    }
+
+    @PostMapping("/search")
+    String postSearch(@RequestParam String searchText) {
+        var result = itemRepository.rawQuery1(searchText);
+        System.out.println(result);
         return "redirect:/list";
     }
 }

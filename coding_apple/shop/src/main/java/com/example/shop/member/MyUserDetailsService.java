@@ -34,10 +34,3 @@ public class MyUserDetailsService implements UserDetailsService {
         return new User(user.getUsername(), user.getPassword(), authorities);
     }
 }
-
-class CustomUser extends User{
-
-    public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
-    }
-}
