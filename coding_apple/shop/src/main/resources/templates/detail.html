@@ -19,6 +19,15 @@
         <p th:text="${item.price}">7억</p>
     </div>
 
+    <form action="/order" method="post">
+        <input name="title" th:value="${item.title}">
+        <input name="price" th:value="${item.price}">
+        <input name="count" placeholder="count">
+        <button style="text-align : left">주문하기</button>
+    </form>
+
+    <br><br><br><br>
+
     <form action="/comment" method="POST">
         <input name="content">
         <input name="parent" th:value="${item.id}">

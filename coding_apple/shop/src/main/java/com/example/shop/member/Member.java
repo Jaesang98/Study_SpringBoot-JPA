@@ -1,8 +1,12 @@
 package com.example.shop.member;
 
+import com.example.shop.sales.Sales;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +24,7 @@ public class Member {
 
     @Column(nullable = false)
     private String displayName;
+
+    @OneToMany(mappedBy = "member")
+    List<Sales> sales = new ArrayList<>();
 }
