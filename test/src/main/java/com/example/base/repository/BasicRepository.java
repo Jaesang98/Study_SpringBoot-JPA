@@ -1,5 +1,6 @@
-package com.example.test;
+package com.example.base.repository;
 
+import com.example.base.entity.BasicEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

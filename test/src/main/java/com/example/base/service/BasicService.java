@@ -1,5 +1,7 @@
-package com.example.test;
+package com.example.base.service;
 
+import com.example.base.entity.BasicEntity;
+import com.example.base.repository.BasicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

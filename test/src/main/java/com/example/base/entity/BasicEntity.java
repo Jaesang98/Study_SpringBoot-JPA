@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.base.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,17 +29,21 @@ public class BasicEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, columnDefinition = "TEXT")
-    private String title;
-
     @Column(nullable = false, unique = true)
     private String userid;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
 
-    private Integer price;
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private String number;
+
+    @Column(nullable = false)
+    private String image;
 }

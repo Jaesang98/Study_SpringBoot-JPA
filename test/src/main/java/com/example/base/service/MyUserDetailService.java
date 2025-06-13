@@ -1,5 +1,8 @@
-package com.example.test;
+package com.example.base.service;
 
+import com.example.base.entity.BasicEntity;
+import com.example.base.entity.CustomUser;
+import com.example.base.repository.BasicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 /*
  * implements : 인터페이스를 구현할 때 사용하는 키워드
@@ -28,29 +32,27 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        var result = basicRepository.findByUsername(username);
-        if(result.isEmpty()) {
-            throw new UsernameNotFoundException("아이디 없음");
+        // DB에서 사용자 조회
+        username = "재상";
+        Optional<BasicEntity> result = basicRepository.findByUsername(username);
+        if (result.isEmpty()) {
+            throw new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + username);
         }
-        var user = result.get();
+
+        BasicEntity user = result.get();
+
+        // 권한 설정
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("일반유저"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER")); // 권한 명은 ROLE_ 로 시작해야 함
 
-        var a = new CustomUser(user.getUsername(), user.getPassword(), authorities);
-        a.title = user.getTitle();
-        return a;
-    }
-}
-
-class CustomUser extends User {
-    public String title;
-
-    public CustomUser(
-            String username,
-            String password,
-            Collection<? extends GrantedAuthority> authorities
-    )
-    {
-        super(username, password, authorities);
+        // CustomUser 리턴
+        return new CustomUser(
+                user.getUsername(),
+                user.getPassword(),
+                authorities,
+                user.getAddress(),
+                user.getNumber(),
+                user.getImage()
+        );
     }
 }

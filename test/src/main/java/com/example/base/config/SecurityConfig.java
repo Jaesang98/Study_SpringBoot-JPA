@@ -1,11 +1,14 @@
-package com.example.test;
+package com.example.base.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 /*
@@ -33,11 +36,32 @@ public class SecurityConfig {
 
         // 특정 페이지 로그인 검사여부
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/**").permitAll()
+//                authorize.requestMatchers("/**").authenticated()
+                        authorize.requestMatchers("/**").permitAll()
+        );
+
+        // 로그인 폼
+        http.formLogin(form -> form
+                .loginPage("/login") // 커스텀 로그인 페이지 경로
+                .loginProcessingUrl("/login-process") // 로그인 form의 action 주소
+                .defaultSuccessUrl("/", true) // 로그인 성공 시 이동 경로
+                .failureUrl("/login?error=true") // 로그인 실패 시 이동 경로
+                .permitAll()
         );
 
         // 로그아웃
         http.logout(logout -> logout.logoutUrl("/logout"));
         return http.build();
+    }
+
+    // 테스트용 인메모리 유저
+    @Bean
+    public InMemoryUserDetailsManager userDetailsService() {
+        UserDetails user = User.builder()
+                .username("testuser")
+                .password(passwordEncoder().encode("1234"))
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(user);
     }
 }

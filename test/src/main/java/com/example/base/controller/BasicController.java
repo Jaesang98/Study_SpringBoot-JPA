@@ -1,5 +1,9 @@
-package com.example.test;
+package com.example.base.controller;
 
+import com.example.base.entity.BasicEntity;
+import com.example.base.entity.CustomUser;
+import com.example.base.repository.BasicRepository;
+import com.example.base.service.BasicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -96,11 +100,11 @@ public class BasicController {
     // 현재 로그인 된 유저의 정보
     private Authentication user(Authentication auth) {
         System.out.println(auth);
-        System.out.println(auth.getAuthorities().contains(new SimpleGrantedAuthority("User"))); //권한 가지고있는지 확인
+//        System.out.println(auth.getAuthorities().contains(new SimpleGrantedAuthority("User"))); //권한 가지고있는지 확인
 
         // getPrincipal() : 로그인한 사용자의 주요 정보를 가져오는 메소드
-        CustomUser result = (CustomUser) auth.getPrincipal();
-        System.out.println(result.title);
+        CustomUser user = (CustomUser) auth.getPrincipal();
+        System.out.println(user);
         return auth;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.test;
+package com.example.base.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
