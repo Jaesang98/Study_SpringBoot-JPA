@@ -1,10 +1,10 @@
-package com.example.data_processing;
+package com.example.spring_base;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DataProcessingApplicationTests {
+class SpringBaseApplicationTests {
 
 	@Test
 	void contextLoads() {
