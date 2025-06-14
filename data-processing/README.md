@@ -2,8 +2,6 @@
 
 > 데이터 가공
 
----
-
 ## 세팅
 ### spring initializr
  - Packaging : Jar
@@ -15,6 +13,3 @@
  - Settings: 
    - Gradle에서 Build and Run `intellij IDEA` 로 설정
    - Java Compiler에서 -parameters로 설정
-
-
----
