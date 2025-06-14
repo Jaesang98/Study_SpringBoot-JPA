@@ -10,7 +10,7 @@ import java.util.*;
 @Controller
 public class DataProcessing {
     
-    /*
+    /**
      * model : 뷰 데이터를 전달할 때 사용
      *  - @ResponseBody 사용 x
      */
@@ -21,7 +21,7 @@ public class DataProcessing {
     }
 
 
-    /*
+    /**
      * List<타입> : 리스트 자료형
      *  - Object : 아무 타입 다 들어갈 수 있음
      *  - String / Integer / Entity / DTO
@@ -39,7 +39,7 @@ public class DataProcessing {
 
 
 
-    /*
+    /**
      * Map<key, value> : Map 자료형
      *  - HashMap, LinkedHashMap, TreeMap 등의 상위요소
      *  - 그냥 Map 쓰면 됨
@@ -57,7 +57,7 @@ public class DataProcessing {
 
 
 
-    /*
+    /**
      * Optional<타입> : 값이 있을 수도있고 없을수도 있는 자료형
      *  - isPresent() : 값이 있으면 True
      *  - isEmpty() : 값이 없으면 True
