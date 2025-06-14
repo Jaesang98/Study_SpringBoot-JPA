@@ -7,6 +7,9 @@ import lombok.ToString;
 
 /*
  * @ManyToOne : 다른 테이블 조인
+ *  - LAZY : 필요할때만 가져옴
+ *  - EAGER : 미리 가져옴
+ *
  * @JoinColumn : 컬럼명
  */
 
@@ -17,7 +20,7 @@ public class BasicEntity2 {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
             name="basicId"
     )
