@@ -6,9 +6,11 @@ import lombok.Setter;
 import lombok.ToString;
 
 /*
- * @ManyToOne : 다대일(N:1) 관계 설정 시 사용
- *  - 여러 엔티티(자식)가 하나의 엔티티(부모)를 참조할 때 사용
- *  - 주로 외래키(FK)를 가진 쪽에 선언함
+ * @ManyToOne : 다른 테이블 조인
+ *  - LAZY : 필요할때만 가져옴
+ *  - EAGER : 미리 가져옴
+ *
+ * @JoinColumn : 컬럼명
  */
 
 
@@ -26,5 +28,8 @@ public class Ex_Entity_List {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name="ex_entity_id"
+    )
     private Ex_Entity ex_entity;
 }
