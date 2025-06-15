@@ -1,4 +1,4 @@
-package com.example.spring_base;
+package com.example.spring_base.DataProcessing;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
