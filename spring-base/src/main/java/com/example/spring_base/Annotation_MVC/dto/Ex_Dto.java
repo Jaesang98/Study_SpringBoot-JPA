@@ -1,6 +1,7 @@
-package com.example.spring_base.Annotation_MVC;
+package com.example.spring_base.Annotation_MVC.dto;
 
 
+import com.example.spring_base.Annotation_MVC.entitiy.Ex_Entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

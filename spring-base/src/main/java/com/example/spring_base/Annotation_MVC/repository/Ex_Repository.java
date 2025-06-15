@@ -1,5 +1,6 @@
-package com.example.spring_base.Annotation_MVC;
+package com.example.spring_base.Annotation_MVC.repository;
 
+import com.example.spring_base.Annotation_MVC.entitiy.Ex_Entity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -16,7 +17,7 @@ import java.util.Optional;
  * findPageBy : 페이지네이션
  */
 
-public interface Ex_Repository extends JpaRepository<Ex_Entity, String> {
+public interface Ex_Repository extends JpaRepository<Ex_Entity, Long> {
 
     // Derived query methods
     Optional<Ex_Entity> findByName(String name);

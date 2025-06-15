@@ -29,8 +29,8 @@ public class Ex_Controller {
      *   - @RequestParam : 쿼리 파라미터를 메서드 매개변수로 받음
      */
     @GetMapping("/annotation/getController")
-    Map<String, Object> GET_Controller(@RequestParam(value = "id", required = false) String id)  {
-        if (id == null || id.trim().isEmpty()) {
+    Map<String, Object> GET_Controller(@RequestParam(value = "id", required = false) Long id)  {
+        if (id == null) {
             Map<String, Object> response = new HashMap<>();
             response.put("response", "id 파라미터가 없습니다.");
             return response;
@@ -46,6 +46,16 @@ public class Ex_Controller {
             return response;
         }
         return ex_service.findName(name);
+    }
+
+    @GetMapping("/annotation/getController3")
+    Map<String, Object> GET_Controller3(@RequestParam(value = "id", required = false) Long id)  {
+        if (id == null) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("response", "id 파라미터가 없습니다.");
+            return response;
+        }
+        return ex_service.findList(id);
     }
 
 

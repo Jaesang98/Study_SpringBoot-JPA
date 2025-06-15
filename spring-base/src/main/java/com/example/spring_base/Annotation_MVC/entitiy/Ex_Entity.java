@@ -1,4 +1,4 @@
-package com.example.spring_base.Annotation_MVC;
+package com.example.spring_base.Annotation_MVC.entitiy;
 
 import jakarta.persistence.*;
 import lombok.Getter;
