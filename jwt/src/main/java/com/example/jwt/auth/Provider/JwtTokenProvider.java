@@ -20,12 +20,19 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+/*
+ * @@Slf4j : log라는 이름의 로깅 객체
+ */
+
 @Slf4j
 @Component
 public class JwtTokenProvider {
     private final Key key;
 
-    // application.yml에서 secret 값 가져와서 key에 저장
+    /*
+     * application.properties 에서 secret 값 가져와서 key에 저장
+     * @Value : application.properties에 정의된 값을 변수에 주입할 때 사용
+     */
     public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);

@@ -20,9 +20,11 @@ import java.util.stream.Collectors;
 @EqualsAndHashCode(of = "id")
 public class Member implements UserDetails {
     @Id
-    @GeneratedValue
-    @Column(name = "member_id", updatable = false, unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "member_email", nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private String username;
@@ -30,23 +32,21 @@ public class Member implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(nullable = false)
+    private String role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role));
+    }
+
     private String nickname;
 
-    private String address; // 도로명 주소
+    private String address;
 
     private String phone;
 
     private String profileImg;
-
-    @ElementCollection(fetch = FetchType.EAGER)
-    @Builder.Default
-    private List<String> roles = new ArrayList<>();
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public boolean isAccountNonExpired() {

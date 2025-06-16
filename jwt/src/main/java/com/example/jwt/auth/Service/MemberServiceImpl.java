@@ -22,16 +22,20 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public JwtToken signIn(String username, String password) {
-        // 1. username + password 를 기반으로 Authentication 객체 생성
-        // 이때 authentication 은 인증 여부를 확인하는 authenticated 값이 false
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+    public JwtToken signIn(String email, String password) {
+        // 1. 전달받은 email과 password로 인증용 객체 생성
+        //    → "이 사용자가 로그인하려고 합니다" 라는 의미
+        //    ※ 이 시점에서는 인증이 완료되지 않은 상태 (authenticated = false)
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(email, password);
 
-        // 2. 실제 검증. authenticate() 메서드를 통해 요청된 Member 에 대한 검증 진행
-        // authenticate 메서드가 실행될 때 CustomUserDetailsService 에서 만든 loadUserByUsername 메서드 실행
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+        // 2. 인증 처리 수행
+        //    → 실제 DB에서 유저 정보를 조회하고, 비밀번호가 맞는지 확인
+        //    → 내부적으로 CustomUserDetailsService.loadUserByUsername()가 실행됨
+        Authentication authentication =
+                authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
-        // 3. 인증 정보를 기반으로 JWT 토큰 생성
+        // 3. 인증 성공 시, 해당 사용자 정보를 바탕으로 JWT 토큰 생성
         JwtToken jwtToken = jwtTokenProvider.generateToken(authentication);
 
         return jwtToken;
